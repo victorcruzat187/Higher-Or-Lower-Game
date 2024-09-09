@@ -1,0 +1,114 @@
+# import the art for the logo
+
+#Import the random module
+import random
+
+
+#Create an introduction for the user
+print("Welcome to Higher or Lower!")
+
+#create the variables that will be compared
+data= [
+    {
+        'name': 'Ronaldo',
+        'follower_count': 990,
+        'description': 'Footballer',
+        'country': 'Portugal'
+
+    },
+    {
+        'name': 'Kim Kardashian',
+        'follower_count': 900,
+        'description': 'Social media Influencer',
+        'country': 'United States'
+    },
+    {
+        'name': 'Dwayne Johnson',
+        'follower_count': 101,
+        'description': 'Actor and wrestler',
+        'country': 'United States'
+    },
+    {
+        'name': 'Kylie Jenner',
+        'follower_count': 167,
+        'description': 'Brand Ambassador and TV Personality',
+        'country': 'United States'
+    },
+    {
+        'name': 'Selena Gomez',
+        'follower_count': 550,
+        'description': 'Singer and Actress',
+        'country': 'United States'
+    },
+    {
+        'name': 'Michael B Jordan',
+        'follower_count': 800,
+        'description': 'Actor',
+        'country': 'United States',
+    },
+    {
+        'name': 'Leo Messi',
+        'follower_count': 970,
+        'description': 'footballer'
+        'country:' 'Argentina'
+    },
+
+]
+
+def format_data(account):
+    #Format acct data and returns the printable format
+    account_name = account["name"]
+    account_description = account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_description}, from {account_country}"
+
+    """"Take a user's guess and the follower count and returns if they got it right"""
+def check_answer(user_guess, a_followers, b_followers):
+
+    if a_followers > b_followers:
+        return user_guess == "a"
+    else:
+        return user_guess == "b"
+
+score = 0
+game_should_continue = True
+account_b = random.choice(data)
+
+while game_should_continue:
+
+#randomize the variables that are chosen from list A and B
+#Make acct at position B become the next acct at position A
+    account_a = account_b
+    account_b = random.choice(data)
+
+    if account_a == account_b:
+        account_b = random.choice(data)
+
+    print(f"Compare A: {format_data(account_a)}.")
+
+    print("vs")
+
+    print(f"Against B: {format_data(account_b)}.")
+
+    #prompt the user to choose option A or B
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+
+    #Clear the screen
+    print("\n" * 20)
+    print("Welcome to Higher or Lower!")
+
+    #Get follower count of each acct
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+#Use if statement to check if user is correct
+#Score Keeping
+    if is_correct:
+        score += 1
+        # Give user feedback on their guess
+        print(f"You're Right! Current score {score}")
+    else:
+        print(f"Sorry, thats wrong. Final score: {score}")
+        # Make Game repeatable.
+        game_should_continue = False
